@@ -7,6 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from locators.base_page_locators import BaseLocator
 from locators.faq_locators import FaqLocator
 from pages.base_page import BasePage
+from pages.faq_page import YaScooterFAQ
 from pages.order_page import YaScooterOrder
 from test_data import Urls
 
@@ -29,3 +30,16 @@ def page_ya_scooter():
     page_ya_scooter.go_to_site_and_get_cookies()
     yield page_ya_scooter
     driver.quit()
+
+
+@pytest.fixture()
+def page_faq():
+    driver = webdriver.Firefox()
+    driver.get(Urls.BASE_PAGE)
+    page_faq = YaScooterFAQ(driver)
+    page_faq.go_to_site_and_get_cookies()
+    page_faq.scroll_to_element(FaqLocator.QUESTIONS_FORM)
+    yield page_faq
+    driver.quit()
+
+

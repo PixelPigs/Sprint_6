@@ -28,8 +28,6 @@ class TestHomePage:
     def test_check_click_yandex_open_new_window_dzen(self, page_ya_scooter):
         page_ya_scooter.order_on_button_top()
         page_ya_scooter.find_element_and_click(BaseLocator.LOGO_YANDEX)
-        WebDriverWait(page_ya_scooter.driver, 10).until(ec.number_of_windows_to_be(2))
-        windows = page_ya_scooter.driver.window_handles
-        page_ya_scooter.driver.switch_to.window(windows[1])
-        WebDriverWait(page_ya_scooter.driver, 10).until(ec.url_contains('dzen'))
+        page_ya_scooter.wait_new_window_and_switch()
+        page_ya_scooter.wait_for_url_content('dzen')
         assert Urls.DZEN_PAGE in page_ya_scooter.check_url_page()

@@ -10,7 +10,7 @@ class YaScooterOrder(BasePage):
     @allure.description('Выбрать поле Метро')
     def enter_street(self, street_name):
         self.find_element_and_click(OrderLocator.SUBWAY_FIELD)
-        street = By.XPATH, f".//div[2]/div[2]/div[4]/div/div[2]/ul/li/button/div[2][contains(text(), '{street_name}')]"
+        street = By.XPATH, f".//div[contains(text(), '{street_name}')]"
         self.find_element_and_click(street)
 
     @allure.description('Найти поле на странице')
@@ -20,13 +20,13 @@ class YaScooterOrder(BasePage):
     @allure.description('Выбрать срок аренды')
     def enter_rental_period(self, rental_period):
         self.find_element_and_click(OrderLocator.RENTAL_BUTTON)
-        rental_period = By.XPATH, f".//div[2]/div[2]/div[2]/div[2]/div[contains(text(), '{rental_period}')]"
+        rental_period = By.XPATH, f".//div[contains(text(), '{rental_period}')]"
         self.find_element_and_click(rental_period)
 
     @allure.description('Выбрать цвет самоката')
     def enter_color(self, color):
         self.check_wait_element(OrderLocator.COLOR)
-        color = By.XPATH, f"./html/body/div/div/div[2]/div[2]/div[3]/label[contains(text(), '{color}')]"
+        color = By.XPATH, f".//label[contains(text(), '{color}')]"
         self.find_element_and_click(color)
 
     @allure.description('Проверить всплывающее окно и клик Подтвердить заказ')

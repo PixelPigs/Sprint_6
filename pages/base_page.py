@@ -44,3 +44,11 @@ class BasePage:
         element = self.find_element_on_page(locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
         return WebDriverWait(self.driver, 3).until(ec.element_to_be_clickable(element))
+
+    def wait_new_window_and_switch(self):
+        WebDriverWait(self.driver, 10).until(ec.number_of_windows_to_be(2))
+        windows = self.driver.window_handles
+        self.driver.switch_to.window(windows[1])
+
+    def wait_for_url_content(self, contains):
+        WebDriverWait(self.driver, 10).until(ec.url_contains(contains))
